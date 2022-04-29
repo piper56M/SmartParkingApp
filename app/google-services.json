@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "146307333191",
+    "firebase_url": "https://smartparkinglot-6388c-default-rtdb.firebaseio.com",
+    "project_id": "smartparkinglot-6388c",
+    "storage_bucket": "smartparkinglot-6388c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146307333191:android:77de6de2ad260973958562",
+        "android_client_info": {
+          "package_name": "com.piotrowski.smartparkingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146307333191-ps7ijhr2n0rdn57ecp7t824u2g238en4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN9hK2u5WlLFLgTj03---ZugSvRV213F8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146307333191-ps7ijhr2n0rdn57ecp7t824u2g238en4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146307333191:android:13e485e666230b0f958562",
+        "android_client_info": {
+          "package_name": "edu.hartford.smartparkinglot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146307333191-e5g3hl0vesvgef3snbnsbo458bdk6b3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.hartford.smartparkinglot",
+            "certificate_hash": "d69a0de005c61fd1852391a5efa35ea4928c66cb"
+          }
+        },
+        {
+          "client_id": "146307333191-ps7ijhr2n0rdn57ecp7t824u2g238en4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN9hK2u5WlLFLgTj03---ZugSvRV213F8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146307333191-ps7ijhr2n0rdn57ecp7t824u2g238en4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
