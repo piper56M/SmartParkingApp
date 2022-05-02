@@ -77,10 +77,10 @@
         android:id="@+id/spot3Opened"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitEnd"
+        android:scaleType="fitStart"
         android:src="@drawable/spot_opened"
-        app:layout_constraintBottom_toTopOf="@+id/hguideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintBottom_toBottomOf="@+id/hguideline2"
+        app:layout_constraintEnd_toEndOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/hguideline3" />
 
@@ -88,7 +88,7 @@
         android:id="@+id/spot2Opened"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitEnd"
+        android:scaleType="fitStart"
         android:src="@drawable/spot_opened"
         app:layout_constraintBottom_toBottomOf="@+id/hguideline3"
         app:layout_constraintEnd_toEndOf="@+id/guideline3"
@@ -144,10 +144,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/spot_opened"
-        android:scaleType="fitEnd"
-        app:layout_constraintBottom_toTopOf="@+id/hguideline5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toEndOf="@+id/guideline5"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="@+id/hguideline5"
+        app:layout_constraintEnd_toEndOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/hguideline6" />
 
     <ImageView
@@ -155,10 +155,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/parking_lot_animation"
-        app:layout_constraintBottom_toTopOf="@+id/hguideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toEndOf="@id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/hguideline6"/>
+        app:layout_constraintBottom_toBottomOf="@+id/hguideline2"
+        app:layout_constraintEnd_toEndOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@id/guideline6"
+        app:layout_constraintTop_toTopOf="@+id/hguideline6"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
