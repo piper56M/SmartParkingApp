@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartParkingApp">
         <activity
-            android:name=".ReadDB"
+            android:name=".ui.dashboard.ReadDB"
             android:exported="true">
         </activity>
         <activity

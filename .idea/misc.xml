@@ -22,8 +22,9 @@
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.196" />
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.196" />
-        <entry key="..\:/git/SmartParkingApp/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
-        <entry key="..\:/git/SmartParkingApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.5" />
+        <entry key="..\:/git/SmartParkingApp/app/src/main/res/drawable/spotopened.xml" value="0.196" />
+        <entry key="..\:/git/SmartParkingApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/git/SmartParkingApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/layout/fragment_notifications.xml" value="0.18802083333333333" />
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18802083333333333" />
