@@ -31,7 +31,7 @@ import com.piotrowski.smartparkingapp.databinding.FragmentNotificationsBinding;
 public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-
+    private NotificationManager notificationManager;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -96,8 +96,9 @@ public class NotificationsFragment extends Fragment {
 //        });
 
 //            PushNotifications push = new PushNotifications(noti);
+            createNotification(noti);
         createNotificationChannel();
-        createNotification(noti);
+
 
 
             final TextView textView = binding.textNotifications;
@@ -122,7 +123,7 @@ public class NotificationsFragment extends Fragment {
                 .addAction(R.drawable.uhart_h, "See Map", pIntent)
                 .build();
 
-        NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         // hide the notification after its selected
 
         notiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -147,7 +148,6 @@ public class NotificationsFragment extends Fragment {
 //            channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
