@@ -93,12 +93,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/hguideline3"
         app:layout_constraintEnd_toEndOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/hguideline4"/>
+        app:layout_constraintTop_toTopOf="@+id/hguideline4" />
 
     <ImageView
         android:id="@+id/spot7Opened"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="spot3open"
         android:scaleType="fitEnd"
         android:src="@drawable/spot_opened"
         app:layout_constraintTop_toTopOf="@+id/hguideline3"
@@ -110,6 +111,7 @@
         android:id="@+id/spot6Opened"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="spot2open"
         android:scaleType="fitEnd"
         android:src="@drawable/spot_opened"
         app:layout_constraintBottom_toBottomOf="@+id/hguideline3"
@@ -121,6 +123,7 @@
         android:id="@+id/spot5Opened"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="spot5open"
         android:scaleType="fitEnd"
         android:src="@drawable/spot_opened"
         app:layout_constraintBottom_toBottomOf="@+id/hguideline4"
@@ -159,6 +162,20 @@
         app:layout_constraintEnd_toEndOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline6"
         app:layout_constraintTop_toTopOf="@+id/hguideline6"/>
+
+    <TextView
+        android:id="@+id/Parking_Lot_Map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parkinglotmap"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

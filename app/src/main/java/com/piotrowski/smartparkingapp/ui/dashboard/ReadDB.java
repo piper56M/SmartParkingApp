@@ -29,18 +29,12 @@ public class ReadDB extends AppCompatActivity {
     private static final String TAG = "Something";
 
 
+
     public void start(
                       ImageView s1O, ImageView s2O, ImageView s3O,
                       ImageView s4O, ImageView s5O, ImageView s6O,
                       ImageView s7O) {
 
-//        retrieveData=r1;
-//        retrieveData2 = r2;
-//        retrieveData3 = r3;
-//        retrieveData4 = r4;
-//        retrieveData5 = r5;
-//        retrieveData6 = r6;
-//        retrieveData7 = r7;
 
         this.s1O = s1O;
         this.s2O = s2O;
@@ -61,13 +55,7 @@ public class ReadDB extends AppCompatActivity {
         dbRef6 = firebaseDB.getReference("6");
         dbRef7 = firebaseDB.getReference("7");
 
-//        retrieveData.setText("Parking Space 01: " + dbRef1.getKey());
-//        retrieveData2.setText("Parking Space 02: " + dbRef2.getKey());
-//        retrieveData3.setText("Parking Space 03: " + dbRef3.getKey());
-//        retrieveData4.setText("Parking Space 04: " + dbRef4.getKey());
-//        retrieveData5.setText("Parking Space 05: " + dbRef5.getKey());
-//        retrieveData6.setText("Parking Space 06: " + dbRef6.getKey());
-//        retrieveData7.setText("Parking Space 07: " + dbRef7.getKey());
+
 
         //binding textview variables with textview elements in xml files
 

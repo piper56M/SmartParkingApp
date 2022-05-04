@@ -1,7 +1,11 @@
 package com.piotrowski.smartparkingapp.ui.notifications;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.XmlResourceParser;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -23,15 +29,19 @@ public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
 
+
+
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         Switch s = binding.DarkModeSwitch;
+
 
         int nightModeFlags =
                 getContext().getResources().getConfiguration().uiMode &
@@ -60,6 +70,32 @@ public class NotificationsFragment extends Fragment {
                     }
                 }
             });
+
+        Switch noti = binding.notiSwitch;
+       /* if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("Notifications", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        noti.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+
+             /*  NotificationCompat.Builder builder = new NotificationCompat.Builder(NotificationsViewModel.class, "My Notifications");
+                        .setSmallIcon(R.drawable.uhart_h)
+                        .setContentTitle("Spaces Open")
+                        .setContentText("Spaces Open Now!")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this, NotificationsViewModel.class);
+                managerCompat.notify(1, builder.build());
+            }
+        });*/
+
+
+
 
             final TextView textView = binding.textNotifications;
             notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);

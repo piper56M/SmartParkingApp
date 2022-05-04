@@ -28,6 +28,9 @@
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/layout/fragment_notifications.xml" value="0.18802083333333333" />
         <entry key="..\:/git/SmartParkingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.21603260869565216" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21603260869565216" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.21557971014492755" />
       </map>
     </option>
   </component>

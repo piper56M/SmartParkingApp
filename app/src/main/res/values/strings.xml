@@ -43,4 +43,7 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="app_settings">App Settings</string>
     <string name="spacestate1">SpaceState1</string>
+    <string name="uhart_pic">TODO</string>
+    <string name="parkinglotmap">Parking Lot Map</string>
+    <string name="notifications">Notifications</string>
 </resources>
