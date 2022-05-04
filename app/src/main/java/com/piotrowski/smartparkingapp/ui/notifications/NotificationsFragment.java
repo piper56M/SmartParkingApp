@@ -115,39 +115,51 @@ public class NotificationsFragment extends Fragment {
     public void createNotification(Switch notiSwitch) {
         // Prepare intent which is triggered if the
         // notification is selected
-        Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, BuildConfig.APPLICATION_ID);
-        intent.putExtra(Settings.EXTRA_CHANNEL_ID, "notifID");
-        startActivity(intent);
+//        Intent intent = new Intent(Settings.ACTION_NOTIFICATION);
+//        intent.putExtra(Settings.EXTRA_APP_PACKAGE, BuildConfig.APPLICATION_ID);
+//        intent.putExtra(Settings.EXTRA_CHANNEL_ID, "notifID");
+//        startActivity(intent);
 
 
 
-//        Intent intent = new Intent(this.getActivity(), this.getClass());
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pIntent = PendingIntent.getActivity(this.getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        Intent intent = new Intent(this.getActivity(), this.getClass());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pIntent = PendingIntent.getActivity(this.getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         // Build notification
         // Actions are just fake
-        Notification notification = new Notification.Builder(this.getContext())
-                .setContentTitle("notification from smart parking app!")
-                .setContentText("Parking Spots Available!")
-                .setSmallIcon(R.drawable.uhart_h)
-                .setContentIntent(pIntent)
-                .addAction(R.drawable.uhart_h, "See Map", pIntent)
-                .build();
 
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext(), "notifID");
+        builder.setSmallIcon((R.drawable.uhart_h));
+        builder.setContentIntent(pIntent);
+        builder.setContentTitle("notification from smart parking app!");
+        builder.setContentText("Parking Spots Available!");
+        builder.setSmallIcon(R.drawable.uhart_h);
+        builder.setContentIntent(pIntent);
+        builder.addAction(R.drawable.uhart_h, "See Map", pIntent);
+
+//        Notification notification = new Notification.Builder(this.getContext())
+//                .setContentTitle("notification from smart parking app!")
+//                .setContentText("Parking Spots Available!")
+//                .setSmallIcon(R.drawable.uhart_h)
+//                .setContentIntent(pIntent)
+//                .addAction(R.drawable.uhart_h, "See Map", pIntent)
+//                .build();
+
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getContext());
         // hide the notification after its selected
 
         notiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-//                if (isChecked) {
-                    notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                    notificationManager.notify(0, notification);
+                if (isChecked) {
+                    notificationManager.notify(0, builder.build());
 
-//                } else {
+//                    notificationManager.notify(0, notification);
 
-//                }
+                } else {
+//                    notification.flags |= Notification.FLAG_AUTO_CANCEL;
+                }
             }
         });
     }
