@@ -29,7 +29,7 @@ public class DashboardFragment extends Fragment {
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        ImageView map = binding.imageView;
+        ImageView map = binding.map;
         int nightModeFlags =
                 getContext().getResources().getConfiguration().uiMode &
                         Configuration.UI_MODE_NIGHT_MASK;
