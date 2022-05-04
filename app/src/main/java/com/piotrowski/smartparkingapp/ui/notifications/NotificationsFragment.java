@@ -95,7 +95,10 @@ public class NotificationsFragment extends Fragment {
 //            }
 //        });
 
-            PushNotifications push = new PushNotifications(noti);
+//            PushNotifications push = new PushNotifications(noti);
+        createNotificationChannel();
+        createNotification(noti);
+
 
             final TextView textView = binding.textNotifications;
             notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
@@ -111,11 +114,13 @@ public class NotificationsFragment extends Fragment {
 
         // Build notification
         // Actions are just fake
-        Notification builder = new Notification.Builder(this.getContext())
+        Notification notification = new Notification.Builder(this.getContext())
                 .setContentTitle("notification from smart parking app!")
-                .setContentText("Parking Spots Available!").setSmallIcon(R.drawable.uhart_h)
+                .setContentText("Parking Spots Available!")
+                .setSmallIcon(R.drawable.uhart_h)
                 .setContentIntent(pIntent)
-                .addAction(R.drawable.uhart_h, "See Map", pIntent).build();
+                .addAction(R.drawable.uhart_h, "See Map", pIntent)
+                .build();
 
         NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         // hide the notification after its selected
@@ -123,16 +128,13 @@ public class NotificationsFragment extends Fragment {
         notiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                if (isChecked) {
+                    notification.flags |= Notification.FLAG_AUTO_CANCEL;
+                    notificationManager.notify(0, notification);
 
-                if (isChecked) {
-                    notificationManager.notify(0, builder);
+//                } else {
 
-                } else {
-                    builder.flags |= Notification.FLAG_AUTO_CANCEL;
-                }
-
-
-
+//                }
             }
         });
     }
