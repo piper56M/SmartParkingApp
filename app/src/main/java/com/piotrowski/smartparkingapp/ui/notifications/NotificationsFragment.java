@@ -35,19 +35,17 @@ public class NotificationsFragment extends Fragment {
     private FragmentNotificationsBinding binding;
     private NotificationManager notificationManager;
     private NotificationChannel channel;
+    NotificationCompat.Builder builder;
+    String openSpaces;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
-
-
-
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         Switch s = binding.DarkModeSwitch;
-
 
         int nightModeFlags =
                 getContext().getResources().getConfiguration().uiMode &
@@ -78,33 +76,12 @@ public class NotificationsFragment extends Fragment {
             });
 
         Switch noti = binding.notiSwitch;
-//       if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-//            NotificationChannel channel = new NotificationChannel("Notifications", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-//            NotificationManager manager = getSystemService(NotificationManager.class);
-//            manager.createNotificationChannel(channel);
-//        }
-
-//        noti.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                NotificationCompat.Builder builder = new NotificationCompat.Builder(NotificationsViewModel.class, "My Notifications");
-//                    .setSmallIcon(R.drawable.uhart_h)
-//                    .setContentTitle("Spaces Open")
-//                    .setContentText("Spaces Open Now!")
-//                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-//
-//                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this, NotificationsViewModel.class);
-//                managerCompat.notify(1, builder.build());
-//            }
-//        });
-
-//            PushNotifications push = new PushNotifications(noti);
 
         notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
             createNotificationChannel();
-            createNotification(noti);
-
-
+            createNotification();
+            ReadDBForNoti rb = new ReadDBForNoti();
+            rb.start(noti, builder, notificationManager, this.getContext());
 
 
             final TextView textView = binding.textNotifications;
@@ -112,56 +89,21 @@ public class NotificationsFragment extends Fragment {
             return root;
     }
 
-    public void createNotification(Switch notiSwitch) {
-        // Prepare intent which is triggered if the
-        // notification is selected
-//        Intent intent = new Intent(Settings.ACTION_NOTIFICATION);
-//        intent.putExtra(Settings.EXTRA_APP_PACKAGE, BuildConfig.APPLICATION_ID);
-//        intent.putExtra(Settings.EXTRA_CHANNEL_ID, "notifID");
-//        startActivity(intent);
-
-
+    public void createNotification() {
 
         Intent intent = new Intent(this.getActivity(), this.getClass());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pIntent = PendingIntent.getActivity(this.getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        // Build notification
-        // Actions are just fake
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext(), "notifID");
+        builder = new NotificationCompat.Builder(this.getContext(), "notifID");
         builder.setSmallIcon((R.drawable.uhart_h));
         builder.setContentIntent(pIntent);
-        builder.setContentTitle("notification from smart parking app!");
-        builder.setContentText("Parking Spots Available!");
+        builder.setContentTitle("Notification from Smart Parking App!");
         builder.setSmallIcon(R.drawable.uhart_h);
         builder.setContentIntent(pIntent);
-        builder.addAction(R.drawable.uhart_h, "See Map", pIntent);
+        builder.setStyle(new NotificationCompat.BigTextStyle());
+//        builder.addAction(R.drawable.uhart_h, "See Map", pIntent);
 
-//        Notification notification = new Notification.Builder(this.getContext())
-//                .setContentTitle("notification from smart parking app!")
-//                .setContentText("Parking Spots Available!")
-//                .setSmallIcon(R.drawable.uhart_h)
-//                .setContentIntent(pIntent)
-//                .addAction(R.drawable.uhart_h, "See Map", pIntent)
-//                .build();
-
-//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getContext());
-        // hide the notification after its selected
-
-        notiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    notificationManager.notify(0, builder.build());
-
-//                    notificationManager.notify(0, notification);
-
-                } else {
-//                    notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                }
-            }
-        });
     }
 
     private void createNotificationChannel() {
@@ -169,7 +111,7 @@ public class NotificationsFragment extends Fragment {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("notifID", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("THIS IS A NOTIF");
+            channel.setDescription("Open spots");
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             getContext().getSystemService(this.getClass());

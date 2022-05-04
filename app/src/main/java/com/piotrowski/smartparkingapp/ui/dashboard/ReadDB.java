@@ -1,6 +1,12 @@
 package com.piotrowski.smartparkingapp.ui.dashboard;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.piotrowski.smartparkingapp.MainActivity;
 import com.piotrowski.smartparkingapp.R;
+import com.piotrowski.smartparkingapp.ui.notifications.NotificationsFragment;
 
 //0 - space available
 //1 - space taken
@@ -26,16 +34,34 @@ public class ReadDB extends AppCompatActivity {
     DatabaseReference dbRef1, dbRef2, dbRef3, dbRef4, dbRef5, dbRef6, dbRef7;
     TextView retrieveData, retrieveData2, retrieveData3, retrieveData4, retrieveData5, retrieveData6, retrieveData7;
     ImageView s1O, s1C, s2O, s2C, s3O, s3C, s4O, s4C, s5O, s5C, s6O, s6C, s7O, s7C;
+    Context c;
+    Bundle b;
+    boolean s1, s2, s3, s4, s5, s6, s7;
     private static final String TAG = "Something";
+    private SharedPreferences sharedPref;
+//    public ReadDB(Intent intent) {
+//        this.intent = intent;
+//    }
 
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //...
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+    }
 
     public void start(
                       ImageView s1O, ImageView s2O, ImageView s3O,
                       ImageView s4O, ImageView s5O, ImageView s6O,
-                      ImageView s7O) {
-
-
+                      ImageView s7O, Context c) {
+        this.c = c;
+        s1 = true;
+        s2 = true;
+        s3 = true;
+        s4 = true;
+        s5 = true;
+        s6 = true;
+        s7 = true;
         this.s1O = s1O;
         this.s2O = s2O;
         this.s3O = s3O;
@@ -56,11 +82,8 @@ public class ReadDB extends AppCompatActivity {
         dbRef7 = firebaseDB.getReference("7");
 
 
-
         //binding textview variables with textview elements in xml files
-
         updatedData();
-
     }
 
     public void removePrints() {
@@ -90,6 +113,8 @@ public class ReadDB extends AppCompatActivity {
                 } else {
                     s1O.setImageResource(R.drawable.spot_closed);
                 }
+
+
             }
 
             @Override
@@ -128,11 +153,11 @@ public class ReadDB extends AppCompatActivity {
                 StringBuilder str3 = new StringBuilder("Parking Space 03: ");
                 str3.append(Space03);
 //                retrieveData3.setText(str3);
-                int s3 = Integer.parseInt(String.valueOf(Space03));
+//                int s3 = Integer.parseInt(String.valueOf(Space03));
                 if (Space03 == 0) {
                     s3O.setImageResource(R.drawable.spot_opened);
                 } else {
-                    s2O.setImageResource(R.drawable.spot_closed);
+                    s3O.setImageResource(R.drawable.spot_closed);
                 }
             }
 
@@ -152,7 +177,7 @@ public class ReadDB extends AppCompatActivity {
                 str4.append(Space04);
 //                   retrieveData4.setText(str4);
 
-                int s4 = Integer.parseInt(String.valueOf(Space04));
+//                int s4 = Integer.parseInt(String.valueOf(Space04));
                 if (Space04 == 0) {
                     s4O.setImageResource(R.drawable.spot_opened);
                 } else {
@@ -177,13 +202,12 @@ public class ReadDB extends AppCompatActivity {
                 str5.append(Space05);
 //                   retrieveData5.setText(str5);
 
-                int s5 = Integer.parseInt(String.valueOf(Space05));
+//                int s5 = Integer.parseInt(String.valueOf(Space05));
                 if (Space05 == 0) {
                     s5O.setImageResource(R.drawable.spot_opened);
                 } else {
                     s5O.setImageResource(R.drawable.spot_closed);
                 }
-
 
             }
 
@@ -202,7 +226,7 @@ public class ReadDB extends AppCompatActivity {
                 str6.append(Space06);
 //                      retrieveData6.setText(str6);
 
-                int s6 = Integer.parseInt(String.valueOf(Space06));
+//                int s6 = Integer.parseInt(String.valueOf(Space06));
 
                 if (Space06 == 0) {
                     s6O.setImageResource(R.drawable.spot_opened);
@@ -228,7 +252,7 @@ public class ReadDB extends AppCompatActivity {
                 str7.append(Space07);
 //                      retrieveData7.setText(str7);
 
-                int s7 = Integer.parseInt(String.valueOf(Space07));
+//                int s7 = Integer.parseInt(String.valueOf(Space07));
 
                 if (Space07 == 0) {
                     s7O.setImageResource(R.drawable.spot_opened);

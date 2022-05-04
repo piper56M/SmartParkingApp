@@ -1,5 +1,6 @@
 package com.piotrowski.smartparkingapp.ui.dashboard;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.piotrowski.smartparkingapp.R;
 import com.piotrowski.smartparkingapp.databinding.FragmentDashboardBinding;
+import com.piotrowski.smartparkingapp.ui.notifications.NotificationsFragment;
 
 public class DashboardFragment extends Fragment {
 
@@ -64,10 +66,11 @@ public class DashboardFragment extends Fragment {
         ImageView spot6Open = binding.spot6Opened;
         ImageView spot7Open = binding.spot7Opened;
 
-        ReadDB rb = new ReadDB();
-        rb.start(
-                spot1Open, spot2Open, spot3Open, spot4Open, spot5Open, spot6Open, spot7Open
-        );
+        ReadDB rb = new ReadDB(); //new Intent(this.getActivity(), this.getClass())
+       rb.start (
+                spot1Open, spot2Open, spot3Open, spot4Open, spot5Open, spot6Open, spot7Open,
+                getContext()
+       );
 
         return root;
     }
