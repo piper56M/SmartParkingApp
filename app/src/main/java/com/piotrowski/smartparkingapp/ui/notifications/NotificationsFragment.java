@@ -1,7 +1,10 @@
 package com.piotrowski.smartparkingapp.ui.notifications;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.XmlResourceParser;
@@ -72,39 +75,84 @@ public class NotificationsFragment extends Fragment {
             });
 
         Switch noti = binding.notiSwitch;
-       /* if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("Notifications", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
+//       if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            NotificationChannel channel = new NotificationChannel("Notifications", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+//            NotificationManager manager = getSystemService(NotificationManager.class);
+//            manager.createNotificationChannel(channel);
+//        }
 
-        noti.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//        noti.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                NotificationCompat.Builder builder = new NotificationCompat.Builder(NotificationsViewModel.class, "My Notifications");
+//                    .setSmallIcon(R.drawable.uhart_h)
+//                    .setContentTitle("Spaces Open")
+//                    .setContentText("Spaces Open Now!")
+//                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+//
+//                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this, NotificationsViewModel.class);
+//                managerCompat.notify(1, builder.build());
+//            }
+//        });
 
-
-             /*  NotificationCompat.Builder builder = new NotificationCompat.Builder(NotificationsViewModel.class, "My Notifications");
-                        .setSmallIcon(R.drawable.uhart_h)
-                        .setContentTitle("Spaces Open")
-                        .setContentText("Spaces Open Now!")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this, NotificationsViewModel.class);
-                managerCompat.notify(1, builder.build());
-            }
-        });*/
-
-
-
+            PushNotifications push = new PushNotifications(noti);
 
             final TextView textView = binding.textNotifications;
             notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
             return root;
-        }
+    }
 
-        @Override
-        public void onDestroyView () {
-            super.onDestroyView();
-            binding = null;
+    public void createNotification(Switch notiSwitch) {
+        // Prepare intent which is triggered if the
+        // notification is selected
+        Intent intent = new Intent(this.getActivity(), this.getClass());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pIntent = PendingIntent.getActivity(this.getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        // Build notification
+        // Actions are just fake
+        Notification builder = new Notification.Builder(this.getContext())
+                .setContentTitle("notification from smart parking app!")
+                .setContentText("Parking Spots Available!").setSmallIcon(R.drawable.uhart_h)
+                .setContentIntent(pIntent)
+                .addAction(R.drawable.uhart_h, "See Map", pIntent).build();
+
+        NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        // hide the notification after its selected
+
+        notiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
+                if (isChecked) {
+                    notificationManager.notify(0, builder);
+
+                } else {
+                    builder.flags |= Notification.FLAG_AUTO_CANCEL;
+                }
+
+
+
+            }
+        });
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("Notifications", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+//            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    @Override
+    public void onDestroyView () {
+        super.onDestroyView();
+        binding = null;
+    }
 }

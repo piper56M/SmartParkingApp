@@ -22,20 +22,19 @@ import com.piotrowski.smartparkingapp.R;
 
 public class PushNotifications extends Activity {
 
-    Switch notiSwitch = findViewById(R.id.noti_switch);
+    Switch notiSwitch;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_notifications);
-
+    public PushNotifications(Switch notiSwitch) {
+        this.notiSwitch = notiSwitch;
+        createNotification();
     }
 
-    public void createNotification(View view) {
+    public void createNotification() {
         // Prepare intent which is triggered if the
         // notification is selected
         Intent intent = new Intent(this, PushNotifications.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         // Build notification
         // Actions are just fake
@@ -63,11 +62,11 @@ public class PushNotifications extends Activity {
 
             }
         });
-
-
-
-
     }
+
+
+
+
 }
 
 
